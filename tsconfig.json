@@ -5,6 +5,9 @@
     "target": "ESNext",
     "module": "Preserve",
     "moduleDetection": "force",
+    // typeRoots の自動解決に任せるとエディタのTS Serverが Bun / bun:test を
+    // 拾えないことがあるため明示する
+    "types": ["bun"],
 
     // Bundler mode
     "moduleResolution": "bundler",
