@@ -6,12 +6,13 @@
     "new": "bun run scripts/new.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit",
-    "lint": "biome check .",
-    "format": "biome format --write ."
+    "lint": "oxlint",
+    "format": "oxfmt ."
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.8",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "oxfmt": "^0.63.0",
+    "oxlint": "^1.78.0"
   },
   "peerDependencies": {
     "typescript": "^5"

@@ -44,8 +44,8 @@ git commit -m "solve: 1. Two Sum (Easy)"
 | `bun --watch test problems/0001-two-sum` | ファイル変更で自動再実行 |
 | `bun test --todo` | 未着手（`it.todo`）も含めて表示する |
 | `bun run typecheck` | 型チェック |
-| `bun run lint` | biome check |
-| `bun run format` | biome format --write |
+| `bun run lint` | oxlint |
+| `bun run format` | oxfmt（インプレース書き換え） |
 
 ## 構成
 
