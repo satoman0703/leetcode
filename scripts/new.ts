@@ -1,17 +1,23 @@
 /**
  * 問題ディレクトリの雛形を生成する。
  *
- * usage:   bun run new <number> <slug> <difficulty>
+ * 番号と slug は LeetCode のものを使う。NeetCode 150 の問題は名前が異なるため、
+ * 第4引数に NeetCode の slug を渡すと README に両方のリンクを並べる。
+ *
+ * usage:   bun run new <number> <slug> <difficulty> [neetcode-slug]
  * example: bun run new 1 two-sum easy
  *          -> problems/0001-two-sum/{solution.ts, solution.test.ts, README.md}
+ *          bun run new 217 contains-duplicate easy duplicate-integer
+ *          -> problems/0217-contains-duplicate/ （README に NeetCode リンクも出力）
  */
 
 const DIFFICULTIES = ["easy", "medium", "hard"] as const;
 type Difficulty = (typeof DIFFICULTIES)[number];
 
 const USAGE = [
-  "usage:   bun run new <number> <slug> <difficulty>",
+  "usage:   bun run new <number> <slug> <difficulty> [neetcode-slug]",
   "example: bun run new 1 two-sum easy",
+  "         bun run new 217 contains-duplicate easy duplicate-integer",
 ].join("\n");
 
 const fail = (message: string): never => {
@@ -30,7 +36,7 @@ const toTitle = (slug: string): string =>
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
-const [numberArg, slugArg, difficultyArg] = Bun.argv.slice(2);
+const [numberArg, slugArg, difficultyArg, neetcodeSlugArg] = Bun.argv.slice(2);
 
 if (!numberArg || !slugArg || !difficultyArg) fail(USAGE);
 
@@ -39,9 +45,16 @@ if (!Number.isInteger(problemNumber) || problemNumber <= 0) {
   fail(`number は正の整数で指定してください: ${numberArg}`);
 }
 
+const KEBAB_CASE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
 const slug = slugArg.toLowerCase();
-if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) {
+if (!KEBAB_CASE.test(slug)) {
   fail(`slug は kebab-case で指定してください: ${slugArg}`);
+}
+
+const neetcodeSlug = neetcodeSlugArg?.toLowerCase();
+if (neetcodeSlug && !KEBAB_CASE.test(neetcodeSlug)) {
+  fail(`neetcode-slug は kebab-case で指定してください: ${neetcodeSlugArg}`);
 }
 
 const difficulty = difficultyArg.toLowerCase() as Difficulty;
@@ -81,9 +94,16 @@ describe("${title}", () => {
 });
 `;
 
+const links = [`- https://leetcode.com/problems/${slug}/`];
+if (neetcodeSlug) {
+  links.push(
+    `- https://neetcode.io/problems/${neetcodeSlug}/question?list=neetcode150`,
+  );
+}
+
 const readme = `# ${title}
 
-- https://leetcode.com/problems/${slug}/
+${links.join("\n")}
 - Difficulty: ${difficultyLabel}
 - Tags:
 
