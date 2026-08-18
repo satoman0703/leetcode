@@ -37,15 +37,15 @@ git commit -m "solve: 1. Two Sum (Easy)"
 
 ## コマンド
 
-| コマンド | 内容 |
-| --- | --- |
-| `bun test` | 全問題のテスト |
-| `bun test problems/0001-two-sum` | 特定の問題だけ |
-| `bun --watch test problems/0001-two-sum` | ファイル変更で自動再実行 |
-| `bun test --todo` | 未着手（`it.todo`）も含めて表示する |
-| `bun run typecheck` | 型チェック |
-| `bun run lint` | oxlint |
-| `bun run format` | oxfmt（インプレース書き換え） |
+| コマンド                                 | 内容                                |
+| ---------------------------------------- | ----------------------------------- |
+| `bun test`                               | 全問題のテスト                      |
+| `bun test problems/0001-two-sum`         | 特定の問題だけ                      |
+| `bun --watch test problems/0001-two-sum` | ファイル変更で自動再実行            |
+| `bun test --todo`                        | 未着手（`it.todo`）も含めて表示する |
+| `bun run typecheck`                      | 型チェック                          |
+| `bun run lint`                           | oxlint                              |
+| `bun run format`                         | oxfmt（インプレース書き換え）       |
 
 ## 構成
 
@@ -69,3 +69,7 @@ Linked List / Tree 問題に入ったら、共通の `ListNode` / `TreeNode` 定
 - `tsconfig.json` の `noUncheckedIndexedAccess` は無効。有効だと `nums[i]` が
   `number | undefined` になり、境界をループ条件で保証済みの箇所にも `!` が必要になるため。
 - CI は置いていない。1人用リポジトリで、push 前に手元でテストを通すため。
+
+## 参考
+
+- NeetCode 150 : https://neetcode.io/practice/practice/neetcode150
