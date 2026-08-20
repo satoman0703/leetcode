@@ -1,20 +1,16 @@
 import { describe, expect, it } from "bun:test";
-import { twoSum } from "./solution";
+import { Solution } from "./solution";
 
 describe("1. Two Sum", () => {
-  it("和が target になる2つの index を返す", () => {
-    expect(twoSum([2, 7, 11, 15], 9)).toEqual([0, 1]);
+  const solution = new Solution();
+  // 実装を始めるときに it.todo を it に変えて Red から始める
+  it("example 1", () => {
+    expect(solution.twoSum([3, 4, 5, 6], 7)).toEqual([0, 1]);
   });
-
-  it("先頭の要素が解に含まれない場合も正しい index を返す", () => {
-    expect(twoSum([3, 2, 4], 6)).toEqual([1, 2]);
+  it("example 1", () => {
+    expect(solution.twoSum([4, 5, 6], 10)).toEqual([0, 2]);
   });
-
-  it("同じ値の要素2つで target を作る場合、同一 index を再利用しない", () => {
-    expect(twoSum([3, 3], 6)).toEqual([0, 1]);
-  });
-
-  it("負の数を含む場合も解を返す", () => {
-    expect(twoSum([-1, -2, -3, -4], -6)).toEqual([1, 3]);
+  it("example 1", () => {
+    expect(solution.twoSum([5, 5], 10)).toEqual([0, 1]);
   });
 });

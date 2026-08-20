@@ -1,15 +1,19 @@
-// LeetCode へ貼るときは末尾の export 文を除く
-function twoSum(nums: number[], target: number): number[] {
-  // 「値 -> index」を走査しながら記録し、各要素で「target との差」が既出かを引く
-  const seenIndexByValue = new Map<number, number>();
+class Solution {
+  /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number[]}
+   */
+  twoSum(nums: number[], target: number): number[] {
+    const map = new Map<number, number>();
+    for (let i = 0; i < nums.length; i++) {
+      const existIndex = map.get(target - nums[i]);
+      if (existIndex !== undefined) return [existIndex, i];
+      map.set(nums[i], i);
+    }
 
-  for (let i = 0; i < nums.length; i++) {
-    const complementIndex = seenIndexByValue.get(target - nums[i]);
-    if (complementIndex !== undefined) return [complementIndex, i];
-    seenIndexByValue.set(nums[i], i);
+    return [];
   }
-
-  return [];
 }
 
-export { twoSum };
+export { Solution };
